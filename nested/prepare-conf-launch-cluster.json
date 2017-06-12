@@ -58,10 +58,10 @@
                 "typeHandlerVersion": "1.5",
                 "autoUpgradeMinorVersion": true,
                 "settings": {
-                    "fileUris": []
+                    "fileUris": "https://raw.githubusercontent.com/sysgain/clouderatd/master/scripts/clusterexecution.sh"
                 },
                 "protectedSettings": {
-                    "commandToExecute": "[concat('cloudera-director bootstrap-remote azure.simple.expanded.conf',' --lp.remote.username=',parameters('clusterParameters').adminUsername,' --lp.remote.password=',parameters('vmSpec').adminPassword,' --lp.remote.hostAndPort=',parameters('clusterParameters').adminUsername,':7189')]"
+                    "commandToExecute": "[concat('sh clusterexecution.sh',' ',parameters('clusterParameters').adminUsername,' ',parameters('vmSpec').adminPassword)]"
                 }
             }
         }
