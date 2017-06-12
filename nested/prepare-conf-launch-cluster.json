@@ -46,7 +46,7 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'), '/bootstrapServer')]",
+      "name": "[concat(parameters('vmName'), '/bootstrapServer1')]",
       "apiVersion": "[parameters('version').resourceAPIVersion]",
       "location": "[resourceGroup().location]",
        "dependsOn": [
