@@ -61,7 +61,7 @@
                     "fileUris": "https://raw.githubusercontent.com/sysgain/clouderatd/master/scripts/clusterexecution.sh"
                 },
                 "protectedSettings": {
-                    "commandToExecute": "[concat('sh clusterexecution.sh',' ',parameters('clusterParameters').adminUsername,' ',parameters('vmSpec').adminPassword)]"
+                    "commandToExecute": "[concat('sh clusterexecution.sh',' ',parameters('clusterParameters').adminUsername,' ',parameters('vmSpec').adminPassword,' ',parameters('vmName'))]"
                 }
             }
         }
