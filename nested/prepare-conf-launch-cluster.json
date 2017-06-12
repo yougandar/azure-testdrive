@@ -49,6 +49,9 @@
       "name": "[concat(parameters('vmName'), '/bootstrapServer')]",
       "apiVersion": "[parameters('version').resourceAPIVersion]",
       "location": "[resourceGroup().location]",
+       "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/extensions/',parameters('vmName'), '/bootstrapServer')]"
+      ],
       "properties": {
         "publisher": "Microsoft.Azure.Extensions",
         "type": "CustomScript",
