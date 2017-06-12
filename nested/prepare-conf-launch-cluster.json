@@ -50,7 +50,7 @@
       "apiVersion": "[parameters('version').resourceAPIVersion]",
       "location": "[resourceGroup().location]",
        "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/extensions/',parameters('vmName'), '/bootstrapServer')]"
+        "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'),'/extensions', '/bootstrapServer')]"
       ],
       "properties": {
         "publisher": "Microsoft.Azure.Extensions",
