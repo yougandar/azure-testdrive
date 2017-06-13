@@ -1,5 +1,4 @@
 #!/bin/bash
-sudo -i
 dirUsername=$1
 dirPassword=$2
 host=$3
