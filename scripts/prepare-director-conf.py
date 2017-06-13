@@ -223,7 +223,7 @@ def main():
     # This line marks the end of all VM extension script run.
     logging.info('---------- VM extension scripts completed ----------')
     import subprocess
-    subprocess.call(["sh clusterexecution.sh", "sys.argv[22]", "sys.argv[23]","sys.argv[24]"])
+    subprocess.call(["sh clusterexecution.sh", "sys.argv[22]", "sys.argv[23]","cloudera"])
     return 0
 
 
