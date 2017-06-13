@@ -39,7 +39,7 @@
         },
         "dirPassword": {
             "type": "securestring",
-            "defaultValue": "Sysgain@123",
+            "defaultValue": "Sysgain@12345",
             "metadata": {
                 "description": "password for the Director Server (A mix of upper and lower-case characters, digits and symbols)"
             }
