@@ -4,14 +4,14 @@
     "parameters": {
         "adminUsername": {
             "type": "string",
-            "defaultValue": "azureuser",
+            "defaultValue": "clouderauser",
             "metadata": {
                 "description": "Admin user name for the VMs"
             }
         },
         "adminPassword": {
             "type": "securestring",
-                "defaultValue": "Sysgain@123",
+                "defaultValue": "Sysgain@1234",
             "metadata": {
                 "description": "Admin password for the VMs (A mix of upper and lower-case characters, digits and symbols)"
             }
@@ -25,21 +25,21 @@
         },
         "dbPassword": {
             "type": "securestring",
-                "defaultValue": "Sysgain@123",
+                "defaultValue": "Sysgain@1234",
             "metadata": {
                 "description": "password for the DB Server (A mix of upper and lower-case characters, digits and symbols)"
             }
         },
         "dirUsername": {
             "type": "string",
-            "defaultValue": "diradmin",
+            "defaultValue": "clouderauser",
             "metadata": {
                 "description": "User name for the Director Server"
             }
         },
         "dirPassword": {
             "type": "securestring",
-            "defaultValue": "Sysgain@12345",
+            "defaultValue": "Sysgain@1234",
             "metadata": {
                 "description": "password for the Director Server (A mix of upper and lower-case characters, digits and symbols)"
             }
@@ -187,7 +187,7 @@
         },
         "businessPhone": {
             "type": "string",
-            "defaultValue": "123456789",
+            "defaultValue": "1234567890",
             "metadata": {
                 "description": "your business phone number"
             }
@@ -264,6 +264,7 @@
             "templateAPIVersion": "2015-11-01",
             "resourceAPIVersion": "2015-06-15",
             "typeHandlerVersion": "2.0",
+            "typeHandlerVersion1":"1.5",
             "contentVersion": "1.0.0.0"
         },
         "addressPrefix": "[parameters('addressPrefix')]",
