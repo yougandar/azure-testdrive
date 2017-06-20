@@ -22,8 +22,7 @@
         }
     },
     "variables": {
-        "singleQuote": "'",
-        "fqdn":"[concat(parameters('vmName'),'.',parameters('location'),'cloudapp.azure.com')]"
+        "singleQuote": "'"
     },
     "resources": [
         {
@@ -65,7 +64,7 @@
                     "fileUris":[
                          "https://raw.githubusercontent.com/sysgain/clouderatd/master/scripts/clusterexecution1.sh"
                     ],
-                    "commandToExecute": "[concat('sh clusterexecution1.sh',' ',parameters('clusterParameters').dirUsername,' ',parameters('clusterParameters').dirPassword,' ',variables('fqdn'))]"
+                    "commandToExecute": "[concat('sh clusterexecution1.sh',' ',parameters('clusterParameters').dirUsername,' ',parameters('clusterParameters').dirPassword,' ',parameters('vmName'))]"
                 }
             }
         }
