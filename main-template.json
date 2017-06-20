@@ -11,7 +11,7 @@
         },
         "adminPassword": {
             "type": "securestring",
-                "defaultValue": "Sysgain@1234",
+            "defaultValue": "Sysgain@1234",
             "metadata": {
                 "description": "Admin password for the VMs (A mix of upper and lower-case characters, digits and symbols)"
             }
@@ -25,7 +25,7 @@
         },
         "dbPassword": {
             "type": "securestring",
-                "defaultValue": "Sysgain@1234",
+            "defaultValue": "Sysgain@1234",
             "metadata": {
                 "description": "password for the DB Server (A mix of upper and lower-case characters, digits and symbols)"
             }
@@ -46,14 +46,14 @@
         },
         "subscriptionId": {
             "type": "string",
-             "defaultValue": "7eab3893-bd71-4690-84a5-47624df0b0e5",
+            "defaultValue": "7eab3893-bd71-4690-84a5-47624df0b0e5",
             "metadata": {
                 "description": ""
             }
         },
         "tenantId": {
             "type": "string",
-             "defaultValue": "dcf9e4d3-f44a-4c28-be12-8245c0d35668",
+            "defaultValue": "dcf9e4d3-f44a-4c28-be12-8245c0d35668",
             "metadata": {
                 "description": ""
             }
@@ -67,7 +67,7 @@
         },
         "clientSecret": {
             "type": "securestring",
-             "defaultValue": "EDBBROGcmzGDbXLiP0V5cH6XELl6Y0EndxBxpHL9J+E=",
+            "defaultValue": "+u9VpFP/ZeqpBKuKoLcAUV8vQmB9xwOhi+RZT7Am/Ys=",
             "metadata": {
                 "description": ""
             }
@@ -264,7 +264,8 @@
             "templateAPIVersion": "2015-11-01",
             "resourceAPIVersion": "2015-06-15",
             "typeHandlerVersion": "2.0",
-            "typeHandlerVersion1":"1.5",
+            "typeHandlerVersion1": "1.5",
+            "datalakeAPIVersion": "2016-11-01",
             "contentVersion": "1.0.0.0"
         },
         "addressPrefix": "[parameters('addressPrefix')]",
@@ -273,6 +274,7 @@
         "share-resourcesUri": "[concat(variables('scriptsUri'), 'nested/shared-resources-new-vnet.json')]",
         "vnetUri": "[concat(variables('scriptsUri'), 'nested/update-new-vnet-dns.json')]",
         "networkRestartUri": "[concat(variables('scriptsUri'), 'nested/network-restart-new-vnet.json')]",
+        "datalakeUri": "[concat(variables('scriptsUri'),'nested/datalake.json')]",
         "storageAccount": {
             "prefix": "[concat(uniquestring(resourceGroup().id),'storage')]",
             "type": "Premium_LRS"
@@ -331,7 +333,12 @@
         },
         "newVNetId": "[resourceId(concat('Microsoft.Network','/','virtualNetworks'),parameters('virtualNetworkName'))]",
         "existingVNetId": "[resourceId(parameters('virtualNetworkRGName'),concat('Microsoft.Network','/','virtualNetworks'),parameters('virtualNetworkName'))]",
-        "VNetId": "[variables(concat(parameters('vnetNewOrExisting'),'VNetId'))]"
+        "VNetId": "[variables(concat(parameters('vnetNewOrExisting'),'VNetId'))]",
+        "prefix": "[uniqueString(resourceGroup().id)]",
+        "location": "[resourceGroup().location]",
+        "newTier": "Consumption",
+        "datalakename": "[concat('cddatalake',substring(variables('prefix'),0,4))]",
+        "servicePrincipalObjectId": "4f7d2dc9-9a78-46c1-8eaf-3a94f118d5b3"
     },
     "resources": [
         {
@@ -480,8 +487,36 @@
                     "clusterParameters": {
                         "value": "[variables('clusterParameters')]"
                     },
-                    "vmSpec":{
+                    "vmSpec": {
                         "value": "[variables('vmSpec')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "DataLakeStore",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('version').templateAPIVersion]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('datalakeUri')]"
+                },
+                "parameters": {
+                    "datalakename": {
+                        "value": "[variables('datalakename')]"
+                    },
+                    "servicePrincipalObjectId": {
+                        "value": "[variables('servicePrincipalObjectId')]"
+                    },
+                    "location": {
+                        "value": "[variables('location')]"
+                    },
+                    "newTier": {
+                        "value": "[variables('newTier')]"
+                    },
+                    "apiVersion": {
+                        "value": "[variables('version').datalakeAPIVersion]"
                     }
                 }
             }
