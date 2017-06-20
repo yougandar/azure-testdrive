@@ -13,12 +13,16 @@
         },
          "newTier":{
             "type":"string"
+         },
+         "apiVersion":{
+             "type": "string"
          }
+
 
     },
     "resources": [
         {
-            "apiVersion": "2016-11-01",
+            "apiVersion": "[parameters('apiVersion')]",
             "name": "[parameters('datalakename')]",
             "location": "[parameters('location')]",
             "type": "Microsoft.DataLakeStore/accounts",
