@@ -17,8 +17,6 @@
          "apiVersion":{
              "type": "string"
          }
-
-
     },
     "resources": [
         {
