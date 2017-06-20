@@ -23,12 +23,12 @@
     },
     "variables": {
         "singleQuote": "'",
-        "vmName":"[concat(parameters('vmName'),parameters('location'),'cloudapp.azure.com')]"
+        "fqdn":"[concat(parameters('vmName'),'.',parameters('location'),'cloudapp.azure.com')]"
     },
     "resources": [
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(variables('vmName'), '/bootstrapServer')]",
+            "name": "[concat(parameters('vmName'), '/bootstrapServer')]",
             "apiVersion": "[parameters('version').resourceAPIVersion]",
             "location": "[parameters('location')]",
             "properties": {
@@ -50,11 +50,11 @@
         },
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(variables('vmName'), '/bootstrapServer1')]",
+            "name": "[concat(parameters('vmName'), '/bootstrapServer1')]",
             "apiVersion": "[parameters('version').resourceAPIVersion]",
             "location":"[parameters('location')]",
             "dependsOn": [
-                "[concat('Microsoft.Compute/virtualMachines/',variables('vmName'),'/extensions', '/bootstrapServer')]"
+                "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'),'/extensions', '/bootstrapServer')]"
             ],
             "properties": {
                 "publisher": "Microsoft.OSTCExtensions",
@@ -65,7 +65,7 @@
                     "fileUris":[
                          "https://raw.githubusercontent.com/sysgain/clouderatd/master/scripts/clusterexecution1.sh"
                     ],
-                    "commandToExecute": "[concat('sh clusterexecution1.sh',' ',parameters('clusterParameters').dirUsername,' ',parameters('clusterParameters').dirPassword,' ',variables('vmName'))]"
+                    "commandToExecute": "[concat('sh clusterexecution1.sh',' ',parameters('clusterParameters').dirUsername,' ',parameters('clusterParameters').dirPassword,' ',variables('fqdn'))]"
                 }
             }
         }
