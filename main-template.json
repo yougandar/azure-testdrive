@@ -323,7 +323,7 @@
         },
          "Director-WEBUI-Url": {
             "type": "string",
-            "value": "[concat(reference('director-node').outputs.dirfqdn.value,':7189')]"
+            "value": "[concat(reference('director-node').outputs.directorFqdn.value,':7189')]"
         },
         "Director-WEBUI-Username": {
             "type": "string",
