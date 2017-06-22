@@ -332,7 +332,7 @@
   "outputs": {
       "directorFqdn": {
             "type": "string",
-            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName')),'2015-06-15').dnsSettings.fqdn]"
+            "value": "[reference(concat('Microsoft.Network/publicIPAddresses/',variables('publicIPAddressName')),'2015-06-15').dnsSettings.fqdn]"
         }
   }
 }
