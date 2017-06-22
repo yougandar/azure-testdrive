@@ -328,11 +328,5 @@
         }
       }
     }
-  ],
-  "outputs": {
-      "fqdn":{
-          "type": "string",
-          "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))).dnsSettings.fqdn]"
-      }
-  }
+  ]
 }
