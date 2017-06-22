@@ -1,4 +1,5 @@
-{
+,
+"{
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
     "contentVersion": "1.0.0.0",
     "parameters": {
@@ -13,7 +14,10 @@
         },
         "vmSpec":{
             "type":"object"
-        }
+        },
+         "scriptsUri":{
+             "type":"string"
+         }
     },
     "variables":{
         "singleQuote": "'"
@@ -31,7 +35,7 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris":[
-                         "https://raw.githubusercontent.com/sysgain/clouderatd/master/scripts/hdfsdatalakesetup.sh"
+                         "[concat(variables('scriptsUri'),'scripts/hdfsdatalakesetup.sh')]"
                     ],
                     "commandToExecute": "[concat('sh hdfsdatalakesetup.sh', ' ',variables('singleQuote'),parameters('vmSpec').adminPassword,variables('singleQuote'))]"
                 }
