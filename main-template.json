@@ -1,344 +1,102 @@
 {
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
     "contentVersion": "1.0.0.0",
-    "parameters": {
-        "adminUsername": {
-            "type": "string",
-            "defaultValue": "clouderauser",
-            "metadata": {
-                "description": "Admin user name for the VMs"
-            }
-        },
-        "adminPassword": {
-            "type": "securestring",
-            "defaultValue": "Sysgain@1234",
-            "metadata": {
-                "description": "Admin password for the VMs (A mix of upper and lower-case characters, digits and symbols)"
-            }
-        },
-        "dbUsername": {
-            "type": "string",
-            "defaultValue": "dbadmin",
-            "metadata": {
-                "description": "User name for the MySQL Server"
-            }
-        },
-        "dbPassword": {
-            "type": "securestring",
-            "defaultValue": "Sysgain@1234",
-            "metadata": {
-                "description": "password for the DB Server (A mix of upper and lower-case characters, digits and symbols)"
-            }
-        },
-        "dirUsername": {
-            "type": "string",
-            "defaultValue": "clouderauser",
-            "metadata": {
-                "description": "User name for the Director Server"
-            }
-        },
-        "dirPassword": {
-            "type": "securestring",
-            "defaultValue": "Sysgain@1234",
-            "metadata": {
-                "description": "password for the Director Server (A mix of upper and lower-case characters, digits and symbols)"
-            }
-        },
-        "subscriptionId": {
-            "type": "string",
-            "defaultValue": "7eab3893-bd71-4690-84a5-47624df0b0e5",
-            "metadata": {
-                "description": ""
-            }
-        },
-        "tenantId": {
-            "type": "string",
-            "defaultValue": "dcf9e4d3-f44a-4c28-be12-8245c0d35668",
-            "metadata": {
-                "description": ""
-            }
-        },
-        "clientId": {
-            "type": "string",
-            "defaultValue": "d4962dd2-e97e-4f3e-aa00-45e202305782",
-            "metadata": {
-                "description": ""
-            }
-        },
-        "clientSecret": {
-            "type": "securestring",
-            "defaultValue": "+u9VpFP/ZeqpBKuKoLcAUV8vQmB9xwOhi+RZT7Am/Ys=",
-            "metadata": {
-                "description": ""
-            }
-        },
-        "directorSize": {
-            "type": "string",
-            "defaultValue": "Standard_DS12_v2",
-            "metadata": {
-                "description": "The size of the VM for Director server"
-            }
-        },
-        "masterType": {
-            "type": "string",
-            "defaultValue": "Standard_DS14",
-            "metadata": {
-                "description": "The size of the VMs deployed as Master(s) in the cluster"
-            }
-        },
-        "workerType": {
-            "type": "string",
-            "defaultValue": "Standard_DS14",
-            "metadata": {
-                "description": "The size of the VMs deployed as Workers in the cluster"
-            }
-        },
-        "edgeType": {
-            "type": "string",
-            "defaultValue": "Standard_DS14",
-            "metadata": {
-                "description": "The size of the VMs deployed as Edge(s) in the cluster"
-            }
-        },
-        "directorEnvironmentName": {
-            "type": "string",
-            "defaultValue": "Director_Azure_Deployment",
-            "metadata": {
-                "description": "Environment name use by Cloudera Director"
-            }
-        },
-        "dnsNamePrefix": {
-            "type": "string",
-            "metadata": {
-                "description": "Unique DNS name prefix where the director VM will be exposed"
-            }
-        },
-        "dnsNameSuffix": {
-            "type": "string",
-            "metadata": {
-                "description": "Unique DNS suffix where the VMs will be exposed"
-            }
-        },
-        "virtualNetworkName": {
-            "type": "string",
-            "defaultValue": "clouderavnet",
-            "metadata": {
-                "description": "The name of the virtual network provisioned for the deployment"
-            }
-        },
-        "vnetNewOrExisting": {
-            "type": "string",
-            "defaultValue": "new",
-            "allowedValues": [
-                "new"
-            ],
-            "metadata": {
-                "description": "Indicator for new or exiting Virtual Network"
-            }
-        },
-        "virtualNetworkRGName": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Resource Group Name for Vnet. For new VNet leave it empty, otherwise type in existing resource group name"
-            }
-        },
-        "subnetName": {
-            "type": "string",
-            "defaultValue": "clouderasubnet",
-            "metadata": {
-                "description": "Subnet name for the virtual network where resources will be provisioned"
-            }
-        },
-        "addressPrefix": {
-            "type": "string",
-            "defaultValue": "10.3.0.0/16",
-            "metadata": {
-                "description": "Virtual Network address CIDR"
-            }
-        },
-        "subnetPrefix": {
-            "type": "string",
-            "defaultValue": "10.3.0.0/16",
-            "metadata": {
-                "description": "CIDR for the subnet where VMs will be placed"
-            }
-        },
-        "directorServerIPAddress": {
-            "type": "string",
-            "defaultValue": "10.3.0.4",
-            "metadata": {
-                "description": "IP address for the director server"
-            }
-        },
-        "company": {
-            "type": "string",
-            "defaultValue": "Company",
-            "metadata": {
-                "description": "Your Company"
-            }
-        },
-        "emailAddress": {
-            "type": "string",
-            "defaultValue": "email@yourcompany.com",
-            "metadata": {
-                "description": "your email"
-            }
-        },
-        "businessPhone": {
-            "type": "string",
-            "defaultValue": "1234567890",
-            "metadata": {
-                "description": "your business phone number"
-            }
-        },
-        "firstName": {
-            "type": "string",
-            "defaultValue": "FirstName",
-            "metadata": {
-                "description": "Your FirstName"
-            }
-        },
-        "lastName": {
-            "type": "string",
-            "defaultValue": "LastName",
-            "metadata": {
-                "description": "Your LastName"
-            }
-        },
-        "jobRole": {
-            "type": "string",
-            "defaultValue": "Administrator",
-            "metadata": {
-                "description": "Job Role"
-            },
-            "allowedValues": [
-                "Administrator",
-                "Analyst (Industry/Finance)",
-                "Analyst (Technical)",
-                "Architect",
-                "C level",
-                "Consultant",
-                "Developer",
-                "Director",
-                "Engineer",
-                "Individual contributor",
-                "Manager",
-                "Partner",
-                "Student",
-                "VP"
-            ]
-        },
-        "jobFunction": {
-            "type": "string",
-            "defaultValue": "Analytics / Business Intelligence",
-            "metadata": {
-                "description": "Job Function"
-            },
-            "allowedValues": [
-                "Analytics / Business Intelligence",
-                "Big Data / Architecture",
-                "Data Warehouse / Management",
-                "Data Science",
-                "Database",
-                "ETL / ELT",
-                "Infrastructure",
-                "IT",
-                "Marketing / Sales",
-                "Networking",
-                "Manager",
-                "Security / Compliance",
-                "Storage"
-            ]
-        },
-        "artifactsBaseUrl": {
-            "type": "string",
-            "metadata": {
-                "artifactsBaseUrl": "Base URL of the Cloudera Template gallery package"
-            },
-            "defaultValue": "https://raw.githubusercontent.com/sysgain/clouderatd/master/"
-        }
-    },
+    "parameters": {},
     "variables": {
-        "version": {
-            "templateAPIVersion": "2015-11-01",
-            "resourceAPIVersion": "2015-06-15",
-            "typeHandlerVersion": "2.0",
-            "typeHandlerVersion1": "1.5",
-            "datalakeAPIVersion": "2016-11-01",
-            "contentVersion": "1.0.0.0"
-        },
-        "addressPrefix": "[parameters('addressPrefix')]",
-        "subnetPrefix": "[parameters('subnetPrefix')]",
-        "scriptsUri": "[parameters('artifactsBaseUrl')]",
+        "scriptsUri": "https://raw.githubusercontent.com/sysgain/clouderatd/master/",
         "share-resourcesUri": "[concat(variables('scriptsUri'), 'nested/shared-resources-new-vnet.json')]",
         "vnetUri": "[concat(variables('scriptsUri'), 'nested/update-new-vnet-dns.json')]",
         "networkRestartUri": "[concat(variables('scriptsUri'), 'nested/network-restart-new-vnet.json')]",
         "datalakeUri": "[concat(variables('scriptsUri'),'nested/datalake.json')]",
-        "storageAccount": {
-            "prefix": "[concat(uniquestring(resourceGroup().id),'storage')]",
-            "type": "Premium_LRS"
+        "hdfsDataLakeUri": "[concat(variables('scriptsUri'),'nested/hdfsDatalakeSetup.json')]",
+        "launchClusterUri": "[concat(variables('scriptsUri'), 'nested/prepare-conf-launch-cluster.json')]",
+        "directornodeUri":"[concat(variables('scriptsUri'), 'nested/director-node-and-shared-resources.json')]",
+        "version": {
+            "templateAPIVersion": "2015-11-01",
+            "resourceAPIVersion": "2015-06-15",
+            "datalakeAPIVersion": "2016-11-01",
+            "typeHandlerVersion": "2.0",
+            "typeHandlerVersion1": "1.5",
+            "contentVersion": "1.0.0.0"
         },
         "clusterParameters": {
-            "envName": "[parameters('directorEnvironmentName')]",
+            "envName": "[variables('directorEnvironmentName')]",
             "location": "[resourceGroup().location]",
-            "subId": "[parameters('subscriptionId')]",
-            "tenantId": "[parameters('tenantId')]",
-            "clientId": "[parameters('clientId')]",
-            "clientSecret": "[parameters('clientSecret')]",
-            "adminUsername": "[parameters('adminUsername')]",
+            "subId": "7eab3893-bd71-4690-84a5-47624df0b0e5",
+            "tenantId": "dcf9e4d3-f44a-4c28-be12-8245c0d35668",
+            "clientId": "d4962dd2-e97e-4f3e-aa00-45e202305782",
+            "clientSecret": "+u9VpFP/ZeqpBKuKoLcAUV8vQmB9xwOhi+RZT7Am/Ys=",
+            "adminUsername": "cloudera",
             "keyFileName": "sshKeyForAzureVM",
             "networkSecurityGroupResourceGroup": "[resourceGroup().name]",
-            "networkSecurityGroup": "[concat(parameters('virtualNetworkName'),'-nsg')]",
+            "networkSecurityGroup": "[concat(variables('virtualNetworkName'),'-nsg')]",
             "virtualNetworkResourceGroup": "[resourceGroup().name]",
-            "virtualNetwork": "[parameters('virtualNetworkName')]",
-            "subnetName": "[parameters('subnetName')]",
+            "virtualNetwork": "[variables('virtualNetworkName')]",
+            "subnetName": "[variables('subnetName')]",
             "computeResourceGroup": "[resourceGroup().name]",
-            "hostFqdnSuffix": "[parameters('dnsNameSuffix')]",
-            "dbAddress": "[parameters('directorServerIPAddress')]",
-            "dbUsername": "[parameters('dbUsername')]",
-            "dbPassword": "[parameters('dbPassword')]",
-            "masterType": "[parameters('masterType')]",
-            "workerType": "[parameters('workerType')]",
-            "edgeType": "[parameters('edgeType')]",
-            "dirUsername": "[parameters('dirUsername')]",
-            "dirPassword": "[parameters('dirPassword')]"
+            "hostFqdnSuffix": "[variables('dnsNameSuffix')]",
+            "dbAddress": "10.3.0.4",
+            "dbUsername": "dbadmin",
+            "dbPassword": "Sysgain@1234",
+            "masterType": "Standard_DS14",
+            "workerType": "Standard_DS14",
+            "edgeType": "Standard_DS14",
+            "dirUsername": "clouderauser",
+            "dirPassword": "Sysgain@1234"
         },
         "userInfo": {
-            "company": "[parameters('company')]",
-            "emailAddress": "[parameters('emailAddress')]",
-            "businessPhone": "[parameters('businessPhone')]",
-            "firstName": "[parameters('firstName')]",
-            "lastName": "[parameters('lastName')]",
-            "jobRole": "[parameters('jobRole')]",
-            "jobFunction": "[parameters('jobFunction')]"
+            "company": "[variables('company')]",
+            "emailAddress": "[variables('emailAddress')]",
+            "businessPhone": "[variables('businessPhone')]",
+            "firstName": "[variables('firstName')]",
+            "lastName": "[variables('lastName')]",
+            "jobRole": "[variables('jobRole')]",
+            "jobFunction": "[variables('jobFunction')]"
         },
         "vmSpec": {
-            "vmSize": "[parameters('directorSize')]",
-            "adminUsername": "[parameters('adminUsername')]",
-            "adminPassword": "[parameters('adminPassword')]",
-            "dbUsername": "[parameters('dbUsername')]",
-            "dbPassword": "[parameters('dbPassword')]"
+            "vmSize": "Standard_DS12_v2",
+            "adminUsername": "cloudera",
+            "adminPassword": "Sysgain@1234",
+            "dbUsername": "dbadmin",
+            "dbPassword": "Sysgain@1234"
         },
         "networkSpec": {
             "addressPrefix": "[variables('addressPrefix')]",
             "subnetPrefix": "[variables('subnetPrefix')]",
-            "directorServerIPAddress": "[parameters('directorServerIPAddress')]",
-            "dnsServerIPAddress": "[parameters('directorServerIPAddress')]",
-            "dbServerIpAddress": "[parameters('directorServerIPAddress')]",
-            "virtualNetworkName": "[parameters('virtualNetworkName')]",
-            "virtualNetworkRGName": "[parameters('virtualNetworkRGName')]",
-            "vnetNewOrExisting": "[parameters('vnetNewOrExisting')]",
-            "virtualNetworkSubnetName": "[parameters('subnetName')]"
+            "directorServerIPAddress": "[variables('directorServerIPAddress')]",
+            "dnsServerIPAddress": "[variables('directorServerIPAddress')]",
+            "dbServerIpAddress": "[variables('directorServerIPAddress')]",
+            "virtualNetworkName": "[variables('virtualNetworkName')]",
+            "vnetNewOrExisting": "[variables('vnetNewOrExisting')]",
+            "virtualNetworkSubnetName": "[variables('subnetName')]"
         },
-        "newVNetId": "[resourceId(concat('Microsoft.Network','/','virtualNetworks'),parameters('virtualNetworkName'))]",
-        "existingVNetId": "[resourceId(parameters('virtualNetworkRGName'),concat('Microsoft.Network','/','virtualNetworks'),parameters('virtualNetworkName'))]",
-        "VNetId": "[variables(concat(parameters('vnetNewOrExisting'),'VNetId'))]",
+        "addressPrefix": "10.3.0.0/16",
+        "subnetPrefix": "10.3.0.0/16",
+        "newVNetId": "[resourceId(concat('Microsoft.Network','/','virtualNetworks'),variables('virtualNetworkName'))]",
+        "VNetId": "[variables(concat(variables('vnetNewOrExisting'),'VNetId'))]",
         "prefix": "[uniqueString(resourceGroup().id)]",
+        "dnsNamePrefix": "[concat('cldr',substring(variables('prefix'),0,4))]",
         "location": "[resourceGroup().location]",
-        "newTier": "Consumption",
         "datalakename": "[concat('cddatalake',substring(variables('prefix'),0,4))]",
-        "servicePrincipalObjectId": "4f7d2dc9-9a78-46c1-8eaf-3a94f118d5b3"
+        "newTier": "Consumption",
+        "servicePrincipalObjectId": "b8c130db-0b3c-4d8a-8606-cbe8986485e9",
+        "directorEnvironmentName": "Director_Azure_Deployment",
+        "dnsNameSuffix": "[concat('cldr',substring(variables('prefix'),0,3),'.local')]",
+        "virtualNetworkName": "clouderavnet",
+        "vnetNewOrExisting": "new",
+        "subnetName": "clouderasubnet",
+        "directorServerIPAddress": "10.3.0.4",
+        "company": "Company",
+        "emailAddress": "email@yourcompany.com",
+        "businessPhone": "123456789",
+        "firstName": "FirstName",
+        "lastName": "LastName",
+        "jobFunction": "Analytics / Business Intelligence",
+        "jobRole": "Administrator",
+        "storageAccount": {
+            "prefix": "[concat(uniquestring(resourceGroup().id),'storage')]",
+            "type": "Premium_LRS"
+        }
     },
     "resources": [
         {
@@ -371,7 +129,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[concat(variables('scriptsUri'), 'nested/director-node-and-shared-resources.json')]",
+                    "uri":"[variables('directornodeUri')]",
                     "contentVersion": "[variables('version').contentVersion]"
                 },
                 "parameters": {
@@ -382,10 +140,10 @@
                         "value": "[variables('version')]"
                     },
                     "dnsNamePrefix": {
-                        "value": "[parameters('dnsNamePrefix')]"
+                        "value": "[variables('dnsNamePrefix')]"
                     },
                     "dnsNameSuffix": {
-                        "value": "[parameters('dnsNameSuffix')]"
+                        "value": "[variables('dnsNameSuffix')]"
                     },
                     "scriptsUri": {
                         "value": "[variables('scriptsUri')]"
@@ -449,13 +207,13 @@
                         "value": "[variables('version')]"
                     },
                     "vmName": {
-                        "value": "[parameters('dnsNamePrefix')]"
+                        "value": "[variables('dnsNamePrefix')]"
                     },
                     "scriptsUri": {
                         "value": "[variables('scriptsUri')]"
                     },
                     "dnsServerIPAddress": {
-                        "value": "[parameters('directorServerIPAddress')]"
+                        "value": "[variables('directorServerIPAddress')]"
                     }
                 }
             }
@@ -471,7 +229,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[concat(variables('scriptsUri'), 'nested/prepare-conf-launch-cluster.json')]",
+                    "uri": "[variables('launchClusterUri')]",
                     "contentVersion": "[variables('version').contentVersion]"
                 },
                 "parameters": {
@@ -479,7 +237,7 @@
                         "value": "[variables('version')]"
                     },
                     "vmName": {
-                        "value": "[parameters('dnsNamePrefix')]"
+                        "value": "[variables('dnsNamePrefix')]"
                     },
                     "scriptsUri": {
                         "value": "[variables('scriptsUri')]"
@@ -489,6 +247,9 @@
                     },
                     "vmSpec": {
                         "value": "[variables('vmSpec')]"
+                    },
+                    "location": {
+                        "value": "[variables('location')]"
                     }
                 }
             }
@@ -520,6 +281,73 @@
                     }
                 }
             }
+        },
+        {
+            "name": "HdfsDataLakeSetup",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('version').templateAPIVersion]",
+            "dependsOn": [
+                "DataLakeStore",
+                "prepare-conf-launch-cluster"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('hdfsDataLakeUri')]"
+                },
+                "parameters": {
+                    "vmName": {
+                        "value": "[variables('dnsNamePrefix')]"
+                    },
+                    "location": {
+                        "value": "[variables('location')]"
+                    },
+                    "version": {
+                        "value": "[variables('version')]"
+                    },
+                     "scriptsUri": {
+                        "value": "[variables('scriptsUri')]"
+                    }
+                }
+            }
         }
-    ]
+    ],
+    "outputs": {
+        "vmAdminUserName":{
+            "type": "string",
+            "value": "[variables('clusterParameters').adminUsername]"
+        },
+        "vmAdminPassword":{
+            "type": "string",
+            "value": "[variables('vmSpec').adminPassword]"
+        },
+         "Director-WEBUI-Url": {
+            "type": "string",
+            "value": "[concat(reference('director-node').outputs.dirfqdn.value,':7189')]"
+        },
+        "Director-WEBUI-Username": {
+            "type": "string",
+            "value": "[variables('clusterParameters').dirUsername]"
+        },
+        "Director-WEBUI-Password": {
+            "type": "string",
+            "value": "[variables('clusterParameters').dirPassword]"
+        },
+        "Manager-WEBUI-Url":{
+            "type": "string",
+            "value": "10.3.0.5:7180"
+        },
+        "Manager-WEBUI-Username":{
+            "type": "string",
+            "value": "admin"
+        },
+        "Manager-WEBUI-Password":{
+            "type": "string",
+            "value": "admin"
+        },
+        "datalakeUrl":{
+            "type":"string",
+            "value": "[concat('adl://',variables('datalakename'),'.azuredatalakestore.net')]"
+        }
+    }
 }
