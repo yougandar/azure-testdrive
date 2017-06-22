@@ -10,6 +10,9 @@
         },
         "location":{
             "type": "string"
+        },
+        "scriptsUri": {
+            "type": "string"
         }
     },
     "variables":{},
@@ -26,7 +29,7 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris":[
-                         "https://raw.githubusercontent.com/sysgain/clouderatd/master/scripts/hdfsdatalakesetup.sh"
+                        "[concat(parameters('scriptsUri'), '/scripts/hdfsdatalakesetup.sh')]"
                     ],
                     "commandToExecute": "sh hdfsdatalakesetup.sh"
                 }
