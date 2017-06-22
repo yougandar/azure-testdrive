@@ -64,7 +64,7 @@
                     "fileUris":[
                          "[concat(parameters('scriptsUri'), 'scripts/clusterexecution.sh')]"
                     ],
-                    "commandToExecute": "[concat('sh clusterexecution1.sh',' ',parameters('clusterParameters').dirUsername,' ',parameters('clusterParameters').dirPassword,' ',parameters('vmName'))]"
+                    "commandToExecute": "[concat('sh clusterexecution.sh',' ',parameters('clusterParameters').dirUsername,' ',parameters('clusterParameters').dirPassword,' ',parameters('vmName'))]"
                 }
             }
         }
