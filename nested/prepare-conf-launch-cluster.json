@@ -62,7 +62,7 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris":[
-                         "https://raw.githubusercontent.com/sysgain/clouderatd/master/scripts/clusterexecution1.sh"
+                         "[concat(parameters('scriptsUri'), '/scripts/clusterexecution.sh')]"
                     ],
                     "commandToExecute": "[concat('sh clusterexecution1.sh',' ',parameters('clusterParameters').dirUsername,' ',parameters('clusterParameters').dirPassword,' ',parameters('vmName'))]"
                 }
