@@ -37,9 +37,9 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris": [
-                        "[concat(parameters('scriptsUri'), '/scripts/prepare-director-conf.py')]",
-                        "[concat(parameters('scriptsUri'), '/scripts/setup-default.py')]",
-                        "[concat(parameters('scriptsUri'), '/scripts/azure.simple.conf')]"
+                        "[concat(parameters('scriptsUri'), 'scripts/prepare-director-conf.py')]",
+                        "[concat(parameters('scriptsUri'), 'scripts/setup-default.py')]",
+                        "[concat(parameters('scriptsUri'), 'scripts/azure.simple.conf')]"
                     ]
                 },
                 "protectedSettings": {
@@ -62,7 +62,7 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris":[
-                         "[concat(parameters('scriptsUri'), '/scripts/clusterexecution.sh')]"
+                         "[concat(parameters('scriptsUri'), 'scripts/clusterexecution.sh')]"
                     ],
                     "commandToExecute": "[concat('sh clusterexecution1.sh',' ',parameters('clusterParameters').dirUsername,' ',parameters('clusterParameters').dirPassword,' ',parameters('vmName'))]"
                 }
