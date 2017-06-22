@@ -11,11 +11,13 @@
         "location":{
             "type": "string"
         },
-        "scriptsUri": {
-            "type": "string"
+        "vmSpec":{
+            "type":"object"
         }
     },
-    "variables":{},
+    "variables":{
+        "singleQuote": "'"
+    },
     "resources":[
 {
             "type": "Microsoft.Compute/virtualMachines/extensions",
@@ -29,9 +31,9 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris":[
-                        "[concat(parameters('scriptsUri'), 'scripts/hdfsdatalakesetup.sh')]"
+                         "https://raw.githubusercontent.com/sysgain/clouderatd/master/scripts/hdfsdatalakesetup.sh"
                     ],
-                    "commandToExecute": "sh hdfsdatalakesetup.sh"
+                    "commandToExecute": "[concat('sh hdfsdatalakesetup.sh', ' ',variables('singleQuote'),parameters('vmSpec').adminPassword,variables('singleQuote'))]"
                 }
             }
         }
