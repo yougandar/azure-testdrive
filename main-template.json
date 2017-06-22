@@ -307,8 +307,11 @@
                     },
                      "scriptsUri": {
                         "value": "[variables('scriptsUri')]"
+                    },
+                    "vmSpec": {
+                        "value": "[variables('vmSpec')]"
                     }
-                }
+                 }
             }
         }
     ],
