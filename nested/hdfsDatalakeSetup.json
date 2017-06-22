@@ -34,7 +34,7 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris":[
-                         "[concat(variables('scriptsUri'),'scripts/hdfsdatalakesetup.sh')]"
+                         "[concat(parameters('scriptsUri'),'scripts/hdfsdatalakesetup.sh')]"
                     ],
                     "commandToExecute": "[concat('sh hdfsdatalakesetup.sh', ' ',variables('singleQuote'),parameters('vmSpec').adminPassword,variables('singleQuote'))]"
                 }
