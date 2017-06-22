@@ -29,7 +29,7 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris":[
-                        "[concat(parameters('scriptsUri'), '/scripts/hdfsdatalakesetup.sh')]"
+                        "[concat(parameters('scriptsUri'), 'scripts/hdfsdatalakesetup.sh')]"
                     ],
                     "commandToExecute": "sh hdfsdatalakesetup.sh"
                 }
