@@ -41,7 +41,7 @@
             "masterType": "Standard_DS14",
             "workerType": "Standard_DS14",
             "edgeType": "Standard_DS14",
-            "dirUsername": "clouderauser",
+            "dirUsername": "cloudera",
             "dirPassword": "Sysgain@1234"
         },
         "userInfo": {
