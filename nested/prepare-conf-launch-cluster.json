@@ -17,7 +17,7 @@
         "vmSpec": {
             "type": "secureObject"
         },
-        "location": {
+        "location":{
             "type": "string"
         }
     },
@@ -51,7 +51,7 @@
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "name": "[concat(parameters('vmName'), '/bootstrapServer1')]",
             "apiVersion": "[parameters('version').resourceAPIVersion]",
-            "location": "[parameters('location')]",
+            "location":"[parameters('location')]",
             "dependsOn": [
                 "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'),'/extensions', '/bootstrapServer')]"
             ],
@@ -61,7 +61,7 @@
                 "typeHandlerVersion": "[parameters('version').typeHandlerVersion1]",
                 "autoUpgradeMinorVersion": true,
                 "settings": {
-                    "fileUris": [
+                    "fileUris":[
                         "[concat(parameters('scriptsUri'), 'scripts/clusterexecution.sh')]"
                     ],
                     "commandToExecute": "[concat('sh clusterexecution.sh',' ',parameters('clusterParameters').dirUsername,' ',parameters('clusterParameters').dirPassword,' ',parameters('vmName'))]"
