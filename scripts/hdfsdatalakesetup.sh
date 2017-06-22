@@ -1,4 +1,5 @@
 #!/bin/sh
+adminpassword=$1
 MangerIP="10.3.0.5"
 curl -u admin:admin 'http://'${MangerIP}':7180/api/v1/clusters/Director_Azure_Deployment/services' > /tmp/ClouderaServices
 cat /tmp/ClouderaServices  | grep 'serviceUrl' | awk -F'/' '{print $6}' | tr -d '",' > /tmp/CServices
