@@ -330,9 +330,9 @@
     }
   ],
   "outputs": {
-      "dirfqdn":{
-          "type": "string",
-          "value": "[reference(variables('publicIPAddressName')).dnssettings.fqdn]"
-      }
+      "directorFqdn": {
+            "type": "string",
+            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'),'2015-06-15').dnsSettings.fqdn]"
+        }
   }
 }
