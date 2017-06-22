@@ -1,0 +1,36 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName":{
+            "type": "string"
+        },
+        "version":{
+            "type": "object"
+        },
+        "location":{
+            "type": "string"
+        }
+    },
+    "variables":{},
+    "resources":[
+{
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('vmName'), '/bootstrapServer1')]",
+            "apiVersion": "[parameters('version').resourceAPIVersion]",
+            "location":"[parameters('location')]",
+            "properties": {
+                "publisher": "Microsoft.OSTCExtensions",
+                "type": "CustomScriptForLinux",
+                "typeHandlerVersion": "[parameters('version').typeHandlerVersion1]",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "fileUris":[
+                         "https://raw.githubusercontent.com/sysgain/clouderatd/master/scripts/hdfsdatalakesetup.sh"
+                    ],
+                    "commandToExecute": "sh hdfsdatalakesetup.sh"
+                }
+            }
+        }
+    ]
+}
