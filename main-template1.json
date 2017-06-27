@@ -277,9 +277,6 @@
                     },
                     "vmSpec": {
                         "value": "[variables('vmSpec')]"
-                    },
-                     "clusterParameters": {
-                        "value": "[variables('clusterParameters')]"
                     }
                  }
             }
