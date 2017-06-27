@@ -7,11 +7,11 @@ cat /tmp/ClouderaServices  | grep 'serviceUrl' | awk -F'/' '{print $6}' | tr -d 
 HDFS=`grep HDFS /tmp/CServices`
 echo $HDFS
 Name1="dfs.adls.oauth2.client.id"
-Value1="8703d353-2f70-4110-b771-bb453a75cc4a"
+Value1="de284f77-88d5-44a9-a7e3-212c062082e1"
 Name2="dfs.adls.oauth2.refresh.url"
 Value2="https://login.windows.net/dcf9e4d3-f44a-4c28-be12-8245c0d35668/oauth2/token"
 Name3="dfs.adls.oauth2.credential"
-Value3="Uv8rAHxfc9YeYERs6PBOkoEVLY8zxvA4pnw2VPTJvrk="
+Value3="Sysgain@123"
 Name4="dfs.adls.oauth2.access.token.provider.type"
 Value4="ClientCredential"
 Name5="fs.adl.impl"
