@@ -24,6 +24,9 @@ ClusterName="Director_Azure_Deployment"
 curl -X PUT -H "content-Type:application/json" -u admin:admin -d '{ "items": [ { "name" : "core_site_safety_valve", "value" : "<property><name>'$Name1'</name><value>'$Value1'</value></property><property><name>'$Name2'</name><value>'$Value2'</value></property><property><name>'$Name3'</name><value>'$Value3'</value></property><property><name>'$Name4'</name><value>'$Value4'</value></property><property><name>'$Name5'</name><value>'$Value5'</value></property><property><name>'$Name6'</name><value>'$Value6'</value></property><property><name>'$Name7'</name><value>'$Value7'</value></property>" }]}' 'http://10.3.0.5:7180/api/v1/clusters/'${ClusterName}'/services/'${HDFS}'/config'
 sleep 30
 /bin/chmod 600 /home/cloudera/sshKeyForAzureVM
+curl -u admin:admin 'http://10.3.0.5:7180/api/v10/hosts > /tmp/ClouderaHosts
+MasterIP=`cat /tmp/ClouderaHosts | grep 'ipAddress' | sed -n 2p | awk -F':' '{print $2}' | sed 's/"//g' | sed 's/,//g'`
+echo "Cloudera Master Node IPAddress: $MasterIP" > /home/cloudera/NodeDetails
 #curl -X POST -u admin:admin 'http://'${MangerIP}':7180/api/v1/clusters/'${ClusterName}'/services/'${HDFS}'/commands/restart'
 #sleep 60
 #curl -X POST -u admin:admin 'http://'${MangerIP}':7180/api/v1/clusters/'${ClusterName}'/commands/restart'
