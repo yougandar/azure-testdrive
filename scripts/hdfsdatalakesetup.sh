@@ -26,6 +26,7 @@ sleep 30
 /bin/chmod 600 /home/cloudera/sshKeyForAzureVM
 curl -u admin:admin 'http://'${MangerIP}':7180/api/v1/hosts > /tmp/ClouderaHosts
 #MasterIP=`cat /tmp/ClouderaHosts | grep 'ipAddress' | sed -n 2p | awk -F':' '{print $2}' | sed 's/"//g' | sed 's/,//g'`
+cat /tmp/ClouderaHosts | grep 'ipAddress' | sed -n 2p | awk -F':' '{print $2}' | sed 's/"//g' | sed 's/,//g' > /tmp/mhost
 echo "Cloudera Director Node private IPAddress: $DirectorIP" >> /home/cloudera/NodeDetails
 echo "Cloudera Manager Node private IPAddress: $MangerIP" >> /home/cloudera/NodeDetails
 echo "Cloudera Master Node private IPAddress: $MasterIP" >> /home/cloudera/NodeDetails
