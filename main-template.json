@@ -8,9 +8,9 @@
         "vnetUri": "[concat(variables('scriptsUri'), 'nested/update-new-vnet-dns.json')]",
         "networkRestartUri": "[concat(variables('scriptsUri'), 'nested/network-restart-new-vnet.json')]",
         "datalakeUri": "[concat(variables('scriptsUri'),'nested/datalake.json')]",
-        "hdfsDataLakeUri": "[concat(variables('scriptsUri'),'nested/hdfsDatalakeSetup.json')]",
+        "hdfsDataLakeUri": "[concat(variables('scriptsUri'),'nested/hdfsDatalakeSetup1.json')]",
         "launchClusterUri": "[concat(variables('scriptsUri'), 'nested/prepare-conf-launch-cluster.json')]",
-        "directornodeUri":"[concat(variables('scriptsUri'), 'nested/director-node-and-shared-resources.json')]",
+        "directornodeUri": "[concat(variables('scriptsUri'), 'nested/director-node-and-shared-resources.json')]",
         "version": {
             "templateAPIVersion": "2015-11-01",
             "resourceAPIVersion": "2015-06-15",
@@ -75,11 +75,12 @@
         "newVNetId": "[resourceId(concat('Microsoft.Network','/','virtualNetworks'),variables('virtualNetworkName'))]",
         "VNetId": "[variables(concat(variables('vnetNewOrExisting'),'VNetId'))]",
         "prefix": "[uniqueString(resourceGroup().id)]",
+         "datalakeDirName":"[concat('demotd',substring(variables('prefix'),0,4))]",
         "dnsNamePrefix": "[concat('cldr',substring(variables('prefix'),0,4))]",
         "location": "[resourceGroup().location]",
         "datalakename": "[concat('cddatalake',substring(variables('prefix'),0,4))]",
         "newTier": "Consumption",
-        "servicePrincipalObjectId": "b8c130db-0b3c-4d8a-8606-cbe8986485e9",
+        "servicePrincipalObjectId": "c205a1a1-92fc-499c-a77a-917bfc78e24e",
         "directorEnvironmentName": "Director_Azure_Deployment",
         "dnsNameSuffix": "[concat('cldr',substring(variables('prefix'),0,3),'.local')]",
         "virtualNetworkName": "clouderavnet",
@@ -129,7 +130,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri":"[variables('directornodeUri')]",
+                    "uri": "[variables('directornodeUri')]",
                     "contentVersion": "[variables('version').contentVersion]"
                 },
                 "parameters": {
@@ -282,13 +283,13 @@
                 }
             }
         },
-        {
+         {
             "name": "HdfsDataLakeSetup",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "[variables('version').templateAPIVersion]",
             "dependsOn": [
-                "DataLakeStore",
-                "prepare-conf-launch-cluster"
+                "prepare-conf-launch-cluster",
+                "DataLakeStore"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -310,6 +311,12 @@
                     },
                     "vmSpec": {
                         "value": "[variables('vmSpec')]"
+                    },
+                    "datalakeDirName":{
+                        "value": "[variables('datalakeDirName')]"
+                    },
+                    "datalakeEndPoint":{
+                        "value":"[concat('adl://',variables('datalakename'),'.azuredatalakestore.net')]"
                     }
                  }
             }
@@ -323,6 +330,10 @@
         "vmAdminPassword":{
             "type": "string",
             "value": "[variables('vmSpec').adminPassword]"
+        },
+         "Director-fqdn": {
+            "type": "string",
+            "value": "[concat(reference('director-node').outputs.directorFqdn.value)]"
         },
          "Director-WEBUI-Url": {
             "type": "string",
@@ -349,7 +360,7 @@
             "value": "admin"
         },
         "datalakeUrl":{
-            "type":"string",
+            "type": "string",
             "value": "[concat('adl://',variables('datalakename'),'.azuredatalakestore.net')]"
         }
     }
