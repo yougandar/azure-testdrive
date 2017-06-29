@@ -1,6 +1,7 @@
 #!/bin/sh
 adminpassword=$1
 datalakeDirName=$2
+datalakeEndPoint=$3
 MangerIP="10.3.0.5"
 DirectorIP="10.3.0.4"
 curl -u admin:admin 'http://'${MangerIP}':7180/api/v1/clusters/Director_Azure_Deployment/services' > /tmp/ClouderaServices
@@ -34,7 +35,8 @@ echo "Cloudera Master Node private IPAddress: $MasterIP" >> /home/cloudera/NodeD
 echo "Cloudera Hue Web UI URL: http://$MasterIP:8888" >> /home/cloudera/NodeDetails
 echo "Cloudera Hue Web UI Username/Password: admin/admin" >> /home/cloudera/NodeDetails
 echo "Your Datalake Directory for the testdrive: $datalakeDirName" >> /home/cloudera/NodeDetails
-echo "Your Datalake Endpoint for the testdrive: adl://datalaketd.azuredatalakestore.net/$datalakeDirName" >> /home/cloudera/NodeDetails
+echo "Your Datalake Endpoint for the testdrive: $datalakeEndPoint" >> /home/cloudera/NodeDetails
+echo "Your Output Data files on Datalake for the testdrive:  $datalakeEndPoint/$datalakeDirName/wordCount" >> /home/cloudera/NodeDetails
 #curl -X POST -u admin:admin 'http://'${MangerIP}':7180/api/v1/clusters/'${ClusterName}'/services/'${HDFS}'/commands/restart'
 #sleep 60
 #curl -X POST -u admin:admin 'http://'${MangerIP}':7180/api/v1/clusters/'${ClusterName}'/commands/restart'
