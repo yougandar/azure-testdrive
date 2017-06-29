@@ -2,7 +2,7 @@
 DataLakedir=$1
 MasterNode=$2
 InputFile=$3
-EndPoint="adl://datalaketd.azuredatalakestore.net"
+EndPoint=$4
 #Creating the Datalake Dirtectory
 hadoop fs -mkdir $EndPoint/$DataLakedir
 #Creating Cloudera user on hdfs cluster
