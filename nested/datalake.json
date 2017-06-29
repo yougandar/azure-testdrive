@@ -22,7 +22,7 @@
         {
             "apiVersion": "[parameters('apiVersion')]",
             "name": "[parameters('datalakename')]",
-            "location": "[parameters('location')]",
+            "location": "East US 2",
             "type": "Microsoft.DataLakeStore/accounts",
             "properties": {
                 "newTier": "[parameters('newTier')]",
