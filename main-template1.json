@@ -74,7 +74,7 @@
         "newVNetId": "[resourceId(concat('Microsoft.Network','/','virtualNetworks'),variables('virtualNetworkName'))]",
         "VNetId": "[variables(concat(variables('vnetNewOrExisting'),'VNetId'))]",
         "prefix": "[uniqueString(resourceGroup().id)]",
-        "datalakeDirName":"[concat('testdir',substring(variables('prefix'),0,4))]",
+        "datalakeDirName":"[concat('demotd',substring(variables('prefix'),0,4))]",
         "dnsNamePrefix": "[concat('cldr',substring(variables('prefix'),0,4))]",
         "location": "[resourceGroup().location]",
         "directorEnvironmentName":"Director_Azure_Deployment",
