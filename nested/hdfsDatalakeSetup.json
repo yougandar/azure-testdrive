@@ -16,6 +16,9 @@
         },
          "scriptsUri":{
              "type":"string"
+         },
+         "datalakeDirName":{
+             "type": "string"
          }
     },
     "variables":{
@@ -36,7 +39,7 @@
                     "fileUris":[
                          "[concat(parameters('scriptsUri'),'scripts/hdfsdatalakesetup.sh')]"
                     ],
-                    "commandToExecute": "[concat('sh hdfsdatalakesetup.sh', ' ',variables('singleQuote'),parameters('vmSpec').adminPassword,variables('singleQuote'))]"
+                    "commandToExecute": "[concat('sh hdfsdatalakesetup.sh', ' ',variables('singleQuote'),parameters('vmSpec').adminPassword,variables('singleQuote'), ' ',variables('singleQuote'),parameters('datalakeDirName'),variables('singleQuote'))]"
                 }
             }
         }
