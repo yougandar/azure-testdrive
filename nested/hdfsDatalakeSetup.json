@@ -19,6 +19,9 @@
          },
          "datalakeDirName":{
              "type": "string"
+         },
+         "datalakeEndPoint":{
+             "type": "string"
          }
     },
     "variables":{
@@ -37,9 +40,9 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris":[
-                         "[concat(parameters('scriptsUri'),'scripts/hdfsdatalakesetup.sh')]"
+                         "[concat(parameters('scriptsUri'),'scripts/hdfsdatalakesetup1.sh')]"
                     ],
-                    "commandToExecute": "[concat('sh hdfsdatalakesetup.sh', ' ',variables('singleQuote'),parameters('vmSpec').adminPassword,variables('singleQuote'), ' ',variables('singleQuote'),parameters('datalakeDirName'),variables('singleQuote'))]"
+                    "commandToExecute": "[concat('sh hdfsdatalakesetup1.sh', ' ',variables('singleQuote'),parameters('vmSpec').adminPassword,variables('singleQuote'), ' ',variables('singleQuote'),parameters('datalakeDirName'),variables('singleQuote'), ' ',variables('singleQuote'),parameters('datalakeEndPoint'),variables('singleQuote'))]"
                 }
             }
         }
