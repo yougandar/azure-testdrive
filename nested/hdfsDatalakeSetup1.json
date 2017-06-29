@@ -17,8 +17,11 @@
          "scriptsUri":{
              "type":"string"
          },
-         "clusterParameters": {
-             "type": "object"
+         "datalakeDirName":{
+             "type": "string"
+         },
+         "datalakeEndPoint":{
+             "type": "string"
          }
     },
     "variables":{
@@ -39,7 +42,7 @@
                     "fileUris":[
                          "[concat(parameters('scriptsUri'),'scripts/hdfsdatalakesetup1.sh')]"
                     ],
-                    "commandToExecute": "[concat('sh hdfsdatalakesetup1.sh', ' ',variables('singleQuote'),parameters('clusterParameters').envName,variables('singleQuote'), ' ',variables('singleQuote'),parameters('vmSpec').adminPassword,variables('singleQuote'))]"
+                    "commandToExecute": "[concat('sh hdfsdatalakesetup1.sh', ' ',variables('singleQuote'),parameters('vmSpec').adminPassword,variables('singleQuote'), ' ',variables('singleQuote'),parameters('datalakeDirName'),variables('singleQuote'), ' ',variables('singleQuote'),parameters('datalakeEndPoint'),variables('singleQuote'))]"
                 }
             }
         }
