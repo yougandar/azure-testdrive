@@ -8,7 +8,7 @@
         "vnetUri": "[concat(variables('scriptsUri'), 'nested/update-new-vnet-dns.json')]",
         "networkRestartUri": "[concat(variables('scriptsUri'), 'nested/network-restart-new-vnet.json')]",
         "datalakeUri": "[concat(variables('scriptsUri'),'nested/datalake.json')]",
-        "hdfsDataLakeUri": "[concat(variables('scriptsUri'),'nested/hdfsDatalakeSetup1.json')]",
+        "hdfsDataLakeUri": "[concat(variables('scriptsUri'),'nested/hdfsDatalakeSetup.json')]",
         "launchClusterUri": "[concat(variables('scriptsUri'), 'nested/prepare-conf-launch-cluster.json')]",
         "directornodeUri": "[concat(variables('scriptsUri'), 'nested/director-node-and-shared-resources.json')]",
         "version": {
