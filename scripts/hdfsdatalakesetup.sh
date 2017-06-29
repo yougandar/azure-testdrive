@@ -31,7 +31,9 @@ MasterIP=`cat /tmp/ClouderaHosts | grep 'ipAddress' | sed -n 2p | awk -F':' '{pr
 echo "Cloudera Director Node private IPAddress: $DirectorIP" >> /home/cloudera/NodeDetails
 echo "Cloudera Manager Node private IPAddress: $MangerIP" >> /home/cloudera/NodeDetails
 echo "Cloudera Master Node private IPAddress: $MasterIP" >> /home/cloudera/NodeDetails
-echo "Cloudera Hue Web UI URL: http://'${MasterIP}':8888" >> /home/cloudera/NodeDetails
+echo "Cloudera Hue Web UI URL: http://$MasterIP:8888" >> /home/cloudera/NodeDetails
+"#!/bin/sh" >> /home/cloudera/MasterScript.sh
+datalakeDir=`echo $datalakeDirName` >> /home/cloudera/MasterScript.sh
 #curl -X POST -u admin:admin 'http://'${MangerIP}':7180/api/v1/clusters/'${ClusterName}'/services/'${HDFS}'/commands/restart'
 #sleep 60
 #curl -X POST -u admin:admin 'http://'${MangerIP}':7180/api/v1/clusters/'${ClusterName}'/commands/restart'
