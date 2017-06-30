@@ -347,10 +347,6 @@
             "type": "string",
             "value": "[variables('clusterParameters').dirPassword]"
         },
-        "Manager-WEBUI-Url":{
-            "type": "string",
-            "value": "10.3.0.5:7180"
-        },
         "Manager-WEBUI-Username":{
             "type": "string",
             "value": "admin"
@@ -358,10 +354,6 @@
         "Manager-WEBUI-Password":{
             "type": "string",
             "value": "admin"
-        },
-        "datalakeUrl":{
-            "type": "string",
-            "value": "[concat('adl://',variables('datalakename'),'.azuredatalakestore.net')]"
         }
     }
 }
