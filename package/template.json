@@ -4,6 +4,7 @@
   "parameters": {
     "adminName": {
       "type": "string",
+      "defaultValue": "adminuser",
       "metadata": {
         "type": "username",
         "description": "Admin user name."
@@ -11,6 +12,7 @@
     },
     "adminPassword": {
       "type": "securestring",
+      "defaultValue": "Password@1234",
       "metadata": {
         "type": "password",
         "description": "Admin password."
