@@ -1,0 +1,68 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "adminName": {
+      "type": "string",
+      "metadata": {
+        "type": "username",
+        "description": "Admin user name."
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "type": "password",
+        "description": "Admin password."
+      } 
+    },
+    "baseUri": {
+      "type": "string",
+      "metadata": {
+        "type": "baseuri",
+        "description": "Base URI for this deployment template."
+      }
+    }
+  },
+  "variables": {
+    "domainNameLabel": "[concat('tdmpq12svm',uniquestring(resourceGroup().id))]",
+    "storageAccountName": "[concat('tdmpq12s',uniquestring(resourceGroup().id))]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2015-01-01",
+      "name": "linkedTemplate",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('baseUri'),'template.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "vmName": { "value": "tdmxp4sql12s" },
+          "domainNameLabel": { "value": "[variables('domainNameLabel')]" },
+          "storageAccountName": { "value": "[variables('storageAccountName')]" },
+          "adminName": { "value": "[parameters('adminName')]" },
+          "adminPassword": { "value": "[parameters('adminPassword')]" },
+          "location": { "value": "[resourceGroup().location]" },
+          "vmSize": { "value": "Standard_D5_V2" }
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "hostname": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Resources/deployments','linkedTemplate')).outputs.hostName.value]"
+    },
+    "username": {
+      "type": "string",
+      "value": "[parameters('adminName')]"
+    },
+    "password": {
+      "type": "string",
+      "value": "[parameters('adminPassword')]"
+    }
+  }
+}
