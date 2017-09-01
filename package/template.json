@@ -15,44 +15,6 @@
         "type": "password",
         "description": "Admin password."
       }
-    },
-    "vmName": {
-      "type": "string",
-      "defaultValue": "adminuser",
-      "metadata": {
-        "type": "vmName",
-        "description": "vmName"
-      }
-    },
-    "domainNameLabel": {
-      "type": "string",
-      "metadata": {
-        "type": "domainNameLabel",
-        "description": "domainNameLabel"
-      }
-    },
-    "storageAccountName": {
-      "type": "string",
-      "metadata": {
-        "type": "storageAccountName",
-        "description": "storageAccountName"
-      }
-    },
-    "location": {
-      "type": "string",
-      "defaultValue": "westus",
-      "metadata": {
-        "type": "location",
-        "description": "location"
-      }    
-    },
-    "vmSize": {
-      "type": "string",
-      "defaultValue": "Standard_DS2_v2",
-      "metadata": {
-        "type": "vmSize",
-        "description": "vmSize"
-      }
     }
   },
   "variables": {
